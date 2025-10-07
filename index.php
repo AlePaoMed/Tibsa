@@ -20,7 +20,7 @@
 
 <header>
   <div class="section-logo">
-    <div class="logo-section">TIB BB</div>
+    <div class="logo-section">TIB</div>
   </div>
 </header>
 
