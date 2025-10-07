@@ -1,3 +1,5 @@
 <?php 
 
-echo "Hola mundito";
+echo "Hola mundito, estoy haciendo pruebas a lo imbecil";
+
+?>
