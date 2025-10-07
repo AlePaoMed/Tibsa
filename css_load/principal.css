@@ -1,0 +1,195 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin:0;
+  background-color:#F5F5F5;
+}
+
+/* Header/logo */
+.section-logo {
+  width: 100%;
+  min-height: 60px;
+  background-color: #0D47A1;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  justify-content: space-between;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #1976D2;
+  color: #fff;
+  min-height: 100vh;
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar .nav-link {
+  color: #fff;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar .nav-link.active {
+  background-color: #0B3D91;
+  font-weight: bold;
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+/* Main content */
+.main-content {
+  flex:1;
+  padding:20px;
+  transition: margin-left 0.3s;
+}
+
+/* Título de la pantalla */
+#module-title {
+  color: #FF5722; 
+  font-weight: bold;
+}
+
+/* Tables */
+.table-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+/* Notificaciones */
+.notification-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.notification-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Flechas animadas */
+.arrow {
+  transition: transform 0.3s;
+}
+
+/* Sidebar hamburguesa móvil */
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+  .sidebar.show {
+    transform: translateX(0);
+  }
+  .main-content {
+    margin-left:0;
+  }
+  .overlay {
+    display:none;
+    position:fixed;
+    top:60px;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+  }
+  .overlay.show {
+    display:block;
+  }
+}
+
+
+
+
+/* Cabeceras con rojo vino */
+  .cabeceraTablajq {
+    background-color: #8b1c3d; /* Rojo vino */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #6a152e; /* Más oscuro para dar fuerza */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+ /* Cabeceras en rojo vino firme */
+  .cabeceraTablajq {
+    background-color: #6a1b1b; /* Rojo vino más profundo */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #4a0f0f; /* Más oscuro para contraste */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* Inputs en cabecera */
+  .cabeceraTablajq input {
+    border: 1px solid #8e3b3b;
+    border-radius: 4px;
+    padding: 5px;
+    width: 90%;
+    outline: none;
+  }
+
+  .cabeceraTablajq input:focus {
+    border-color: #6a1b1b;
+    box-shadow: 0 0 4px #b85c5c;
+  }
+
+  /* Filas alternas con fondo neutro (no rosado) */
+  #sipa12_tbl_1 tbody tr:nth-child(even) td {
+    background-color: #f4f4f4; /* Gris claro */
+  }
+
+  #sipa12_tbl_1 tbody tr:nth-child(odd) td {
+    background-color: #ffffff;
+  }
+
+  /* Hover en filas (tono más sobrio) */
+  #sipa12_tbl_1 tbody tr:hover td {
+    background-color: #ede7e7; /* Gris con toque vino muy sutil */
+    transition: 0.2s;
+  }
+
+.tituloLeyenda {
+
+    color: #6a1b1b; /* Rosa fuerte para resaltar */
+    font-weight: 700;
+    font-size: 18px;
+    padding: 12px 15px;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 5px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+ 
+.form-label {
+  color: #ff0080; /* Rosa fuerte neón */
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif; /* Fuente gamer/futurista */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+
