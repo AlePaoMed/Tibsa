@@ -197,4 +197,147 @@ class cmpa11{
 
         return $Content;
     }
+
+
+   public function addexcel(){
+
+     $Content = '
+
+        <div style="max-width:1200px; width:100%;" >
+
+		   <div class="pantallasweb">
+
+           <span class="tituloLeyenda">CLIENTES - </span>
+
+           <label for="rfc" class="form-label">Centro de carga</label>
+
+          <div style="float:right;">
+		       <a href="?f=cmpa11&_g=see" class="btn btn-sm btn-danger"><- REGRESAR</a>
+		       </div>
+
+          <form action="?f=cmpa11&_g=addDownload" enctype="multipart/form-data" method="post">
+            
+             <input type="file" name="archivo" id="archivo"> <br><br>
+            
+             <input type="submit" class="btn btn-sm btn-primary" name="boton" id="boton" value="Guardar">
+            
+          </form>
+
+      </div>
+
+      ';
+
+
+      return $Content; 
+
+
+   }
+
+   public function addDownload($tib){
+
+      error_reporting(1);
+
+  
+
+      require_once('/var/www/html/librerias/vendor/autoload.php');
+
+      $Directorio = '/var/www/html/devtib/COMPRIMIDOR_TIBSA/CM/cmpa11/XLS/';
+     
+      $cmd = 'if [ ! -d ' . escapeshellarg($Directorio) . ' ]; then mkdir -p ' . escapeshellarg($Directorio) . ' && chmod 777 ' . escapeshellarg($Directorio) . ' && echo "Creado"; else echo "Ya existe"; fi';
+      $output = shell_exec($cmd . ' 2>&1');
+    
+
+      if(is_dir($Directorio)){
+      $aLlowedExts = array("xls","xlsx","XLS","XLSX");
+      $Extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+
+    
+      if(($_FILES['archivo']['name'] != "") && in_array($Extension, $aLlowedExts )){
+        $Name = date('dmY_mmss').'.'.$Extension;
+        $Ubicacion = '/var/www/html/devtib/COMPRIMIDOR_TIBSA/CM/cmpa11/XLS/'.basename($Name);
+        $Error = UPLOAD_ERR_OK;
+        $Move = move_uploaded_file($_FILES['archivo']['tmp_name'], $Ubicacion);
+        if ($Error == 0){
+          $InputFileName = '/var/www/html/devtib/COMPRIMIDOR_TIBSA/CM/cmpa11/XLS/'.$Name;
+          chmod('/var/www/html/devtib/COMPRIMIDOR_TIBSA/CM/cmpa11/XLS/'.$Name, 0777);
+        
+
+          if (!file_exists($InputFileName)) {
+              die("Archivo NO encontrado: $InputFileName");
+          }
+
+        
+          $inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($InputFileName);
+          $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+          $spreadsheet = $reader->load($InputFileName);
+          
+          $sheet = $spreadsheet->getSheet(0);
+          $rows = $sheet->toArray(null, true, true, true);
+
+          $linea = 0;
+
+          foreach ( $rows as $aRow){
+
+            if ($linea >= 2) {  
+
+               if (empty($aRow['C']) && empty($aRow['B']) && empty($aRow['D']) && empty($aRow['E'])  ) {
+                 continue;
+               }
+
+               $nombre = strtoupper($aRow['C']);
+               $rfc = strtoupper($aRow['B']);
+               $codigopostal = strtoupper($aRow['D']);
+               $regimenfiscal = strtoupper($aRow['E']);
+               $telefono = '';
+               $correo = '';
+               $limite  = '0.00';
+               $estado  = 'A';
+
+               $numeroSeq = $tib->GetOne("SELECT LPAD(nextval('SEQ_CM_CLIENTES')::text, 8, '0')");
+               $nextId = 'TIB' . $numeroSeq;
+               $insert = "INSERT INTO CM_CLIENTES (
+                    id_cliente, 
+                    nombre_razon, 
+                    rfc_social, 
+                    regimen_fiscal,
+                    codigo_postal, 
+                    telefono, 
+                    correo,
+                    limite_credito,
+                    estado
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $Const = $tib->Prepare($insert);
+                $Ver = $tib->Execute($Const, [
+                    $nextId,        // id_cliente
+                    $nombre,        // nombre_razon
+                    $rfc,           // rfc_social
+                    $regimenfiscal, // regimen_fiscal
+                    $codigopostal,  // codigo_postal
+                    $telefono,      // telefono
+                    $correo,         // correo
+                    $limite,
+                    $estado
+                ]);
+
+  
+
+            }
+
+            $linea++;
+
+          }
+
+          echo "<script>
+             alert(1, 'Se inserrtaron todos los registros...');
+             location.href = '?f=cmpa11&_g=see';
+          </script>";
+
+
+        }
+      }
+    }
+
+
+
+   }
 }
