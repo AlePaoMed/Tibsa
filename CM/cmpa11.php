@@ -285,13 +285,18 @@ class cmpa11{
                }
 
                $nombre = strtoupper($aRow['C']);
-               $rfc = strtoupper($aRow['B']);
+               $rfc = trim(strtoupper($aRow['B']));
                $codigopostal = strtoupper($aRow['D']);
                $regimenfiscal = strtoupper($aRow['E']);
                $telefono = '';
                $correo = '';
                $limite  = '0.00';
                $estado  = 'A';
+
+
+               $SelVer = $tib->GetOne("select count(id_cliente) from CM_CLIENTES where rfc_social = '".$rfc."'  ");
+
+               if($SelVer == 0){
 
                $numeroSeq = $tib->GetOne("SELECT LPAD(nextval('SEQ_CM_CLIENTES')::text, 8, '0')");
                $nextId = 'TIB' . $numeroSeq;
@@ -318,6 +323,9 @@ class cmpa11{
                     $limite,
                     $estado
                 ]);
+
+
+              }
 
   
 
