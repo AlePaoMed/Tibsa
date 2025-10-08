@@ -14,6 +14,8 @@ class cmpa11{
 		   
 		   <div style="float:right;">
 		      <a href="?f=cmpa11&_g=add" class="btn btn-success">+ AGREGAR</a>
+
+          <a href="?f=cmpa11&_g=addexcel" class="btn btn-success">+ CENTRO DE CARGA</a>
 		   </div>
 		   
 		   <br><br>
