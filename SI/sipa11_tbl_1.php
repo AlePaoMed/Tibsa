@@ -8,12 +8,12 @@
   include("/var/www/html/devtib/tibsa/validacionCredrenciales.php");
    
   $conn=$tib;
-  $conn->debug = true;
+  
 
    
    $aColumns = array('a.pantalla', 'a.nombre', 'a.url_desc', 'a.estado', 'a.modulo', 'b.descripcion' );
    $IndexColumn = "a.pantalla";
-   $Table = "pantallas a JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento";
+   $Table = "pantallas a JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento::text";
   
  
   
@@ -64,7 +64,7 @@
   
   //Total registros Selecionados con la busqueda
   $Sql="select count(a.pantalla)
-        from pantallas a JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento
+        from pantallas a JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento::text
         $Where";
   $NumRows = $conn->GetOne($Sql);
 
@@ -80,7 +80,7 @@ FROM (
     SELECT a.pantalla, a.nombre, a.url_desc, a.estado, a.modulo, b.descripcion,
            ROW_NUMBER() OVER () AS rnum
     FROM pantallas a
-    JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento
+    JOIN movimientos b ON a.tipo_movimiento = b.tipo_movimiento::text
 
     $Where
 

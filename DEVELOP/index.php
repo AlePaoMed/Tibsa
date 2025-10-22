@@ -28,7 +28,7 @@ if($_GET["f"] == true){
           <div class="siswebweb">
 	
 	
-	        '.$SistemaWebPP.'
+	        '.$SistemaWebPP.' 
 	
 	
 	
@@ -76,7 +76,7 @@ if($_GET["f"] == true){
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ERP Completo - Panel Administrativo</title>
+<title>ERP En Crecimiento</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link href="../css/principal.css?v.2355343354645646464476" rel="stylesheet">
@@ -139,7 +139,7 @@ if($_GET["f"] == true){
 
   <div class="main-content">
 
-   <?php echo  $ContenidoWeb ; ?>
+   <?php echo  $ContenidoWeb ; ?> 
 
   </div>
 
